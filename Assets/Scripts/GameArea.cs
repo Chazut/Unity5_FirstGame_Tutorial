@@ -19,6 +19,29 @@ public class GameArea : MonoBehaviour {
     public Color gizmosColor = new Color(0, 0, 1, 0.2f);
     private Color gizmosWireColor;
 
+    static private GameArea _main;
+    static public GameArea Main
+    {
+        get
+        {
+            if (!_main)
+            {
+                _main = (GameArea) GameObject.FindObjectOfType(typeof (GameArea));
+                if (!_main)
+                {
+                    GameObject go = new GameObject("Game Area : Main");
+                    _main = go.AddComponent<GameArea>();
+                    go.AddComponent<FitToCamera>();
+                }
+            }
+            return _main;
+        }
+        set
+        {
+            _main = value;
+        }
+    }
+
     public Vector2 size;
     public Vector2 Size
     {

@@ -72,6 +72,7 @@ public class Spawner : MonoBehaviour {
                 Debug.DrawLine(debugPos, _position);
             }
 
+            // TODO : Use Object Pulling
             GameObject obj = (GameObject) Instantiate(reference, _position, transform.rotation);
             Rigidbody2D rb2D = obj.GetComponent<Rigidbody2D>();
             if (rb2D)
@@ -92,5 +93,7 @@ public class Spawner : MonoBehaviour {
             yield return new WaitForSeconds(animatorDelayOut);
             animator.SetBool(spawningHashID, false);
         }
+
+        gameObject.SetActive(false);
     }
 }
