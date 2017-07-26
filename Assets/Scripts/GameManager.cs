@@ -21,7 +21,6 @@ static public class GameManager {
         }
     }
 
-
     public const float maxDamage = 100;
     static private float _damage;
     static public float Damage
