@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/*
- * Objectif:
- * Faire boucler la position de l'objet dans une zone rectangulaire
- */
-
+ /// <summary>
+ /// Loop an Object in rectangular area.
+ /// </summary>
 [AddComponentMenu("Chazu Games/Transform Looper")]
 public class GameAreaKeeper : MonoBehaviour {
 

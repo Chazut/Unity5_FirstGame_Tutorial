@@ -88,6 +88,7 @@
     <Compile Include="Assets\Scripts\GameArea.cs" />
     <Compile Include="Assets\Scripts\GameAreaKeeper.cs" />
     <Compile Include="Assets\Scripts\SimpleShipController.cs" />
+    <Compile Include="Assets\Scripts\Spawner.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Sprites\Spaceships\Smallfighter-spaceship-by-MillionthVector\Credits.txt" />

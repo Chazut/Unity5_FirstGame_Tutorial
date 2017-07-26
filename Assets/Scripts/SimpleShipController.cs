@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// SpaceShip controller.
+/// </summary>
+[AddComponentMenu("Chazu Games/SpaceShip Controller")]
 public class SimpleShipController : MonoBehaviour {
 	
 	// Update is called once per frame
