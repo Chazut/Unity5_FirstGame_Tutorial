@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Spawn an Object into an Area, with customizable velocity and location
+/// </summary>
+[AddComponentMenu("Chazu Games/Spawner")]
 public class Spawner : MonoBehaviour {
 
     [Header("SPAWN")]

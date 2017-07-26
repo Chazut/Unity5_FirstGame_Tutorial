@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 114004088491609100}
   - component: {fileID: 60373740295810610}
   - component: {fileID: 50396626368621914}
+  - component: {fileID: 114178295693666790}
   m_Layer: 0
   m_Name: SpaceShip
   m_TagString: Player
@@ -249,6 +250,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thrustPower: 10
   steerPower: 5
+--- !u!114 &114178295693666790
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1469865258040006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 523212bfc3c42174585034fd3449eb28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vulnerability: 10
 --- !u!212 &212045047849616260
 SpriteRenderer:
   m_ObjectHideFlags: 1
