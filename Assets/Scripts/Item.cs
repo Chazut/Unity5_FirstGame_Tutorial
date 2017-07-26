@@ -33,7 +33,7 @@ public class Item : MonoBehaviour {
                 GameManager.Damage = 0;
                 break;
             case TYPE.ExtraLife:
-                //TODO GameManager.Life++
+                GameManager.Lives++;
                 break;
             default:
                 break;
