@@ -26,6 +26,21 @@ public class Spawner : MonoBehaviour {
     [Range(0, 10)] public float minStrenght = 1f;
     [Range(0, 10f)] public float maxStrenght = 10f;
 
+    [Header("ANIMATOR")]
+    public string animatorSpawningParameterName = "Spawning";
+    private int spawningHashID;
+    public float animatorDelayIn = 3;
+    public float animatorDelayOut = 1;
+
+    private Animator animator;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+        if (animator)
+            spawningHashID = Animator.StringToHash(animatorSpawningParameterName);
+    }
+
     private IEnumerator Start()
     {
       
@@ -37,6 +52,12 @@ public class Spawner : MonoBehaviour {
                 player = playerGO.transform;
             else
                 Debug.LogWarning("No Player Found.");
+        }
+
+        if (animator)
+        {
+            animator.SetBool(spawningHashID, true);
+            yield return new WaitForSeconds(animatorDelayIn);
         }
 
         while (infinite || _remaining > 0)
@@ -64,6 +85,12 @@ public class Spawner : MonoBehaviour {
 
             _remaining--;
             yield return new WaitForSeconds(1 / Random.Range(minRate, maxRate));
+        }
+
+        if (animator)
+        {
+            yield return new WaitForSeconds(animatorDelayOut);
+            animator.SetBool(spawningHashID, false);
         }
     }
 }
