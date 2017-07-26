@@ -12,7 +12,7 @@ public class GameAreaKeeper : MonoBehaviour {
     private Vector3 areaSpacePosition;
 
     // Update is called once per frame
-    void Update () {
+    void FixedUpdate () {
         areaSpacePosition = gameArea.transform.InverseTransformPoint(transform.position);
 
         if (gameArea.Area.Contains(areaSpacePosition))
