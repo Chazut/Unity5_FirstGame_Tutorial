@@ -89,6 +89,7 @@
     <Compile Include="Assets\Scripts\GameArea.cs" />
     <Compile Include="Assets\Scripts\GameAreaKeeper.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\Item.cs" />
     <Compile Include="Assets\Scripts\ShipDamage.cs" />
     <Compile Include="Assets\Scripts\SimpleShipController.cs" />
     <Compile Include="Assets\Scripts\Spawner.cs" />
