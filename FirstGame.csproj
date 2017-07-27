@@ -90,6 +90,7 @@
     <Compile Include="Assets\Scripts\GameArea.cs" />
     <Compile Include="Assets\Scripts\GameAreaKeeper.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\GameUI.cs" />
     <Compile Include="Assets\Scripts\Item.cs" />
     <Compile Include="Assets\Scripts\Projectile.cs" />
     <Compile Include="Assets\Scripts\ShipDamage.cs" />

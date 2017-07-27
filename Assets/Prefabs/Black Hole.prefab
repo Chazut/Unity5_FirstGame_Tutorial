@@ -73,7 +73,7 @@ MonoBehaviour:
   reference: {fileID: 1673169813226736, guid: cc54291469fc68b40acb6cf076602325, type: 2}
   minRate: 0.5
   maxRate: 0.5
-  number: 10
+  number: 5
   infinite: 0
   area: {fileID: 0}
   minDistanceFromPlayer: 0
