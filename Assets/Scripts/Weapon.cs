@@ -10,7 +10,7 @@ public class Weapon : MonoBehaviour {
 
     public GameObject projectile;
     public Transform[] emmitters;
-    [Range(0.001f, 10f)] public float firingRate = 1;
+    [Range(0.001f, 10f)] public float firingRate = 1f;
     public float firingRange = 5;
 
     private int _current;

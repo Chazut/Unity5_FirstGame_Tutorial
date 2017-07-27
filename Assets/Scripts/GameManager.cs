@@ -4,9 +4,49 @@ using UnityEngine;
 
 static public class GameManager {
 
+    public enum STATE
+    {
+        Running,
+        Paused,
+        Over
+    }
+
     public delegate void ScoreChange(int score);
     public delegate void LivesChange(int lives);
     public delegate void damageChange(float damage);
+    public delegate void StateChange(STATE State);
+
+    static public event StateChange StateChanged;
+    static private STATE _state;
+    static public STATE State
+    {
+        get { return _state; }
+        set
+        {
+            if (value != _state)
+            {
+                _state = value;
+
+                switch (_state)
+                {
+                    case STATE.Running:
+                        Time.timeScale = 1;
+                        break;
+                    case STATE.Paused:
+                        Time.timeScale = 0;
+                        break;
+                    case STATE.Over:
+                        Time.timeScale = 0;
+                        break;
+                    default:
+                        break;
+                }
+
+                if (StateChanged != null)
+                    StateChanged(_state);
+            }
+        }
+    }
 
     static public event LivesChange LivesChanged;
     static private int _lives = 3;
@@ -24,7 +64,7 @@ static public class GameManager {
                 }
                 if(_lives <= 0)
                 {
-                    //TODO Handle Game Over
+                    State = STATE.Over;
                 }
             }
         }
