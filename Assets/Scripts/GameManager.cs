@@ -21,6 +21,30 @@ static public class GameManager {
         }
     }
 
+    static private int _score;
+    static public int Score
+    {
+        get { return _score; }
+        set
+        {
+            if (value != _score)
+            {
+                _score = value;
+                if(_score > HighScore)
+                {
+                    HighScore = _score;
+                }
+            }
+        }
+    }
+
+    //static private int _highScore;
+    static public int HighScore
+    {
+        get { return PlayerPrefs.GetInt("HighScore", 0); }
+        set { PlayerPrefs.SetInt("HighScore", value); }
+    }
+
     public const float maxDamage = 100;
     static private float _damage;
     static public float Damage

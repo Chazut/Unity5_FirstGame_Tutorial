@@ -23,9 +23,10 @@ GameObject:
   - component: {fileID: 114887589898643490}
   - component: {fileID: 61366926110480812}
   - component: {fileID: 82644784660367390}
+  - component: {fileID: 114930104895122552}
   m_Layer: 8
   m_Name: Rocket
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -160,6 +161,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3
+--- !u!114 &114930104895122552
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1035981367280158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2a8f461a82708e489d8cded9c25ddd4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameArea: {fileID: 0}
 --- !u!212 &212377458460415928
 SpriteRenderer:
   m_ObjectHideFlags: 1
