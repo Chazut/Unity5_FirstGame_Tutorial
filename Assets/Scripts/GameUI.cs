@@ -40,6 +40,7 @@ public class GameUI : MonoBehaviour {
         damageSlider.value = GameManager.Damage;
         _damageFillArea.color = Color.Lerp(damageSliderColorMin, damageSliderColorMax, GameManager.Damage / damageSlider.maxValue);
 
+        OnStateChanged(GameManager.State);
 
         GameManager.ScoreChanged += delegate (int score)
             {
@@ -62,13 +63,15 @@ public class GameUI : MonoBehaviour {
                 _damageFillArea.color = Color.Lerp(damageSliderColorMin, damageSliderColorMax, damage/damageSlider.maxValue);
             };
 
-        GameManager.StateChanged += delegate (GameManager.STATE state)
-            {
-                gameStateText.text = string.Format("GAME {0}", state.ToString().ToUpper());
-                pauseButton.gameObject.SetActive(state != GameManager.STATE.Paused);
-                pauseMenu.gameObject.SetActive(state != GameManager.STATE.Running);
-                resumeButton.gameObject.SetActive(state != GameManager.STATE.Over);
-            };
+        GameManager.StateChanged += OnStateChanged;
+    }
+
+    void OnStateChanged(GameManager.STATE state)
+    {
+        gameStateText.text = string.Format("GAME {0}", state.ToString().ToUpper());
+        pauseButton.gameObject.SetActive(state == GameManager.STATE.Running);
+        pauseMenu.gameObject.SetActive(state != GameManager.STATE.Running);
+        resumeButton.gameObject.SetActive(state != GameManager.STATE.Over);
     }
 
     public void PauseGame()
