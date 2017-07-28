@@ -5,36 +5,36 @@ using System.Linq;
 
 public class ObjectPool : MonoBehaviour {
 
-    public List<GameObject> objectList;
-    public GameObject objectToRecycle;
-    public int totalObjectAtStart;
+    private List<GameObject> _objectList;
+    private GameObject _objectToRecycle;
+    private int _totalObjectAtStart;
 
     static private Dictionary<int, ObjectPool> pools = new Dictionary<int, ObjectPool>();
 
     private void Init()
     {
-        objectList = new List<GameObject>(totalObjectAtStart);
-        for(int i = 0; i<totalObjectAtStart; i++)
+        _objectList = new List<GameObject>(_totalObjectAtStart);
+        for(int i = 0; i<_totalObjectAtStart; i++)
         {
-            GameObject newObject = Instantiate(objectToRecycle);
+            GameObject newObject = Instantiate(_objectToRecycle);
             newObject.transform.parent = transform;
             newObject.SetActive(false);
-            objectList.Add(newObject);
+            _objectList.Add(newObject);
         }
-        pools.Add(objectToRecycle.GetInstanceID(), this);
+        pools.Add(_objectToRecycle.GetInstanceID(), this);
     }
 
     private GameObject PoolObject (Vector3 position = default(Vector3), Quaternion rotation = default(Quaternion))
     {
-        var freeObject = (from item in objectList
+        var freeObject = (from item in _objectList
                           where item.activeSelf == false
                           select item).FirstOrDefault();
 
         if(freeObject == null)
         {
-            freeObject = (GameObject)Instantiate(objectToRecycle, position, rotation);
+            freeObject = (GameObject)Instantiate(_objectToRecycle, position, rotation);
             freeObject.transform.parent = transform;
-            objectList.Add(freeObject);
+            _objectList.Add(freeObject);
         }
         else
         {
@@ -56,8 +56,8 @@ public class ObjectPool : MonoBehaviour {
         {
             GameObject go = new GameObject("ObjectPool: " + original.name);
             ObjectPool newPool = go.AddComponent<ObjectPool>();
-            newPool.objectToRecycle = original;
-            newPool.totalObjectAtStart = poolSize;
+            newPool._objectToRecycle = original;
+            newPool._totalObjectAtStart = poolSize;
             newPool.Init();
         }
     }
