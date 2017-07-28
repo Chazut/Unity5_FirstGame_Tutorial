@@ -10,6 +10,7 @@ public class Spawner : MonoBehaviour {
 
     [Header("SPAWN")]
     public GameObject reference;
+    private int _referenceID;
 
     [Header("SPAWNING")]
     [Range(0.001f, 100f)] public float minRate = 0.50f;
@@ -40,6 +41,8 @@ public class Spawner : MonoBehaviour {
 
     private void Awake()
     {
+        ObjectPool.InitPool(reference);
+        _referenceID = reference.GetInstanceID();
         animator = GetComponent<Animator>();
         if (animator)
             spawningHashID = Animator.StringToHash(animatorSpawningParameterName);
@@ -77,7 +80,7 @@ public class Spawner : MonoBehaviour {
             }
 
             //GameObject obj = (GameObject) Instantiate(reference, _position, transform.rotation);
-            GameObject obj = ObjectPool.GetInstance(reference, _position, transform.rotation);
+            GameObject obj = ObjectPool.GetInstance(_referenceID, _position, transform.rotation);
             Rigidbody2D rb2D = obj.GetComponent<Rigidbody2D>();
             if (rb2D)
             {
