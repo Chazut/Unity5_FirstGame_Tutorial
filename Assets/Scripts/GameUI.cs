@@ -24,12 +24,31 @@ public class GameUI : MonoBehaviour {
     public Button resumeButton;
     public Image pauseMenu;
 
+    [Header("Settings")]
+    public Slider musicVolumeSlider;
+    public Slider sfxVolumeSlider;
+
+    public float MusicVolume
+    {
+        get { return PlayerSettings.MusicVolume; }
+        set { PlayerSettings.MusicVolume = value; }
+    }
+
+    public float SfxVolume
+    {
+        get { return PlayerSettings.SfxVolume; }
+        set { PlayerSettings.SfxVolume = value; }
+    }
+
     private void Awake()
     {
         damageSliderColorMin = Color.yellow;
         damageSliderColorMax = Color.red;
         damageSlider.maxValue = GameManager.maxDamage;
         _damageFillArea = damageSlider.fillRect.GetComponent<Image>();
+
+        musicVolumeSlider.value = MusicVolume;
+        sfxVolumeSlider.value = SfxVolume;
     }
 
     private void Start()
