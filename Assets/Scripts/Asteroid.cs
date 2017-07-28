@@ -17,9 +17,10 @@ public class Asteroid : MonoBehaviour {
 
         GameManager.Score += score;
 
-        //TODO Use Object Pooling
-        Destroy(gameObject);
-        Destroy(collision.gameObject);
+        //Destroy(gameObject);
+        ObjectPool.Release(gameObject);
+
+        //Destroy(collision.gameObject);
     }
 
 }

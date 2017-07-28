@@ -20,8 +20,9 @@ public class Projectile : MonoBehaviour {
         _audio = GetComponent<AudioSource>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
+        _distance = 0;
         if (_audio)
             _audio.Play();
     }
@@ -32,8 +33,8 @@ public class Projectile : MonoBehaviour {
         _distance += speed * Time.fixedDeltaTime;
         if(_distance > range)
         {
-            //TODO Use Object Pooling
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            ObjectPool.Release(gameObject);
         }
     }
 

@@ -30,8 +30,8 @@ public class Weapon : MonoBehaviour {
     {
         _current = (_current >= emmitters.Length - 1) ? 0 : _current + 1;
         Vector3 position = emmitters[_current].TransformPoint(Vector3.up * 0.5f);
-        //TODO Use Object Pooling
-        GameObject projectileInstance = (GameObject) Instantiate(projectile, position, emmitters[_current].rotation);
+        //GameObject projectileInstance = (GameObject) Instantiate(projectile, position, emmitters[_current].rotation);
+        GameObject projectileInstance = ObjectPool.GetInstance(projectile, position, emmitters[_current].rotation);
         projectileInstance.GetComponent<Projectile>().range = firingRange;
         Physics2D.IgnoreCollision(_shipCollider2D, projectileInstance.GetComponent<Collider2D>());
     }

@@ -48,7 +48,8 @@ public class Item : MonoBehaviour {
         _collider2D.enabled = false;
         _renderer.enabled = false;
         yield return new WaitForSeconds(audioSrc.clip.length);
-        //TODO Use Object Pulling
-        Destroy(gameObject);
+
+        //Destroy(gameObject);
+        ObjectPool.Release(gameObject);
     }
 }
