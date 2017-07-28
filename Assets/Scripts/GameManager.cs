@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 static public class GameManager {
 
@@ -130,5 +131,21 @@ static public class GameManager {
         }
     }
 
+    static public void Restart()
+    {
+        Lives = 3;
+        Damage = 0;
+        Score = 0;
+
+        LivesChanged = null;
+        ScoreChanged = null;
+        HighScoreChanged = null;
+        DamageChanged = null;
+        StateChanged = null;
+
+        //TODO : Reset all objects instead of reloading the level
+        SceneManager.LoadScene(0);
+        State = STATE.Running;
+    }
 
 }

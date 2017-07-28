@@ -103,4 +103,9 @@ public class GameUI : MonoBehaviour {
         GameManager.State = GameManager.STATE.Running;
     }
 
+    public void RestartGame()
+    {
+        GameManager.Restart();
+    }
+
 }
