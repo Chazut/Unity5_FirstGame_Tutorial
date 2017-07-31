@@ -88,6 +88,11 @@
     <Compile Include="Assets\Scripts\AudioManager.cs" />
     <Compile Include="Assets\Scripts\AutoRelease.cs" />
     <Compile Include="Assets\Scripts\CollisionDamage.cs" />
+    <Compile Include="Assets\Scripts\Controls\ControlsBase.cs" />
+    <Compile Include="Assets\Scripts\Controls\ControlsInput.cs" />
+    <Compile Include="Assets\Scripts\Controls\IControllable.cs" />
+    <Compile Include="Assets\Scripts\Controls\ShipControllerBase.cs" />
+    <Compile Include="Assets\Scripts\Controls\ShipControllerTransform.cs" />
     <Compile Include="Assets\Scripts\FitToCamera.cs" />
     <Compile Include="Assets\Scripts\FloatExtensions.cs" />
     <Compile Include="Assets\Scripts\Follow.cs" />
