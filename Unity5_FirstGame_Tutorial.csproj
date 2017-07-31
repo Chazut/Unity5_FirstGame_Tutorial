@@ -90,6 +90,7 @@
     <Compile Include="Assets\Scripts\CollisionDamage.cs" />
     <Compile Include="Assets\Scripts\FitToCamera.cs" />
     <Compile Include="Assets\Scripts\FloatExtensions.cs" />
+    <Compile Include="Assets\Scripts\Follow.cs" />
     <Compile Include="Assets\Scripts\GameArea.cs" />
     <Compile Include="Assets\Scripts\GameAreaKeeper.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />

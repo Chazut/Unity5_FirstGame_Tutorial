@@ -76,6 +76,17 @@ public class ObjectPool : MonoBehaviour {
 
     static public void Release (GameObject obj)
     {
+        if(obj.GetComponentInParent<ObjectPool>() == null)
+        {
+            foreach (ObjectPool p in pools.Values)
+            {
+                if (p._objectList.Contains(obj))
+                {
+                    obj.transform.parent = p.transform;
+                    break;
+                }
+            }
+        }
         obj.SetActive(false);
     }
 

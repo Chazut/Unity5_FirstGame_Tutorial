@@ -13,6 +13,9 @@ public class ShipDamage : MonoBehaviour {
     private Rigidbody2D _rigidBody2D;
     private Collider2D _collider2D;
 
+    public GameObject impact;
+    private int _impactID;
+
     private float Damage
     {
         get{ return GameManager.Damage; }
@@ -23,6 +26,9 @@ public class ShipDamage : MonoBehaviour {
     {
         _rigidBody2D = GetComponent<Rigidbody2D>();
         _collider2D = GetComponent<Collider2D>();
+
+        _impactID = impact.GetInstanceID();
+        ObjectPool.InitPool(impact);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -40,6 +46,12 @@ public class ShipDamage : MonoBehaviour {
         if (collision.rigidbody)
         {
             damage *= (collision.rigidbody.mass / _rigidBody2D.mass);
+        }
+
+        if (damage >= 0.01f)
+        {
+            GameObject impactObj = ObjectPool.GetInstance(_impactID, collision.contacts[0].point);
+            impactObj.transform.parent = transform;
         }
 
         Damage += damage;
