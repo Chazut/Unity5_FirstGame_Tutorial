@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof (Animator))]
 public abstract class ShipControllerBase : MonoBehaviour, IControllable
 {
     public AnimationCurve steeringCurve;
@@ -10,6 +11,11 @@ public abstract class ShipControllerBase : MonoBehaviour, IControllable
 
     private float rearPowerLimit = 0.2f;
     private Vector2 _thrust_tmp;
+
+    protected Animator _animatorController;
+    protected int _steeringHashID;
+    protected int _thrustXHashID;
+    protected int _thrustYHashID;
 
     private Vector2 _thrust;
     protected Vector2 Thrust
@@ -20,6 +26,8 @@ public abstract class ShipControllerBase : MonoBehaviour, IControllable
             if (value != _thrust)
             {
                 _thrust = value;
+                _animatorController.SetFloat(_thrustXHashID, _thrust.x);
+                _animatorController.SetFloat(_thrustYHashID, _thrust.y);
             }
         }
     }
@@ -33,6 +41,7 @@ public abstract class ShipControllerBase : MonoBehaviour, IControllable
             if (value != _steering)
             {
                 _steering = value;
+                _animatorController.SetFloat(_steeringHashID, _steering);
             }
         }
     }
@@ -51,6 +60,14 @@ public abstract class ShipControllerBase : MonoBehaviour, IControllable
         Thrust = _thrust_tmp;
 
         enabled = (movement != Vector2.zero);
+    }
+
+    protected void Awake()
+    {
+        _animatorController = GetComponent<Animator>();
+        _steeringHashID = Animator.StringToHash("Steering");
+        _thrustXHashID = Animator.StringToHash("ThrustX");
+        _thrustYHashID = Animator.StringToHash("ThrustY");
     }
 
 }
