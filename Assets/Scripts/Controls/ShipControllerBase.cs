@@ -62,7 +62,7 @@ public abstract class ShipControllerBase : MonoBehaviour, IControllable
         enabled = (movement != Vector2.zero);
     }
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         _animatorController = GetComponent<Animator>();
         _steeringHashID = Animator.StringToHash("Steering");

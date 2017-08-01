@@ -92,6 +92,7 @@
     <Compile Include="Assets\Scripts\Controls\ControlsInput.cs" />
     <Compile Include="Assets\Scripts\Controls\IControllable.cs" />
     <Compile Include="Assets\Scripts\Controls\ShipControllerBase.cs" />
+    <Compile Include="Assets\Scripts\Controls\ShipControllerPhysics2D.cs" />
     <Compile Include="Assets\Scripts\Controls\ShipControllerTransform.cs" />
     <Compile Include="Assets\Scripts\FitToCamera.cs" />
     <Compile Include="Assets\Scripts\FloatExtensions.cs" />
