@@ -46,12 +46,12 @@ public class Asteroid : MonoBehaviour {
         ObjectPool.Release(collision.gameObject);
 
         GameObject expl = ObjectPool.GetInstance(_explosionID, collision.contacts[0].point);
-        expl.GetComponent<Follow>().target = transform;
+        //expl.GetComponent<Follow>().target = transform;
         //expl.transform.parent = transform;
 
         //Destroy(gameObject);
         //Destroy(collision.gameObject);
-        ObjectPool.Release(gameObject);
+        //ObjectPool.Release(gameObject);
 
         _delay = expl.GetComponent<AutoRelease>().duration;
         StartCoroutine(Release(_delay));
@@ -60,8 +60,8 @@ public class Asteroid : MonoBehaviour {
     private IEnumerator Release(float delay)
     {
         yield return new WaitForSeconds(delay);
-        //ObjectPool.Release(gameObject);
         StartCoroutine(Release(delay));
+        ObjectPool.Release(gameObject);
     }
 
 }

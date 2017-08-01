@@ -8,8 +8,10 @@ using UnityEngine;
 [AddComponentMenu("Chazu Games/Item")]
 public class Item : MonoBehaviour {
 
-	public enum TYPE { RepairKit, ExtraLife};
+	public enum TYPE { RepairKit, ExtraLife, Weapon};
     public TYPE type;
+
+    public Weapon weapon;
 
     private AudioSource audioSrc;
     private Renderer _renderer;
@@ -34,6 +36,9 @@ public class Item : MonoBehaviour {
                 break;
             case TYPE.ExtraLife:
                 GameManager.Lives++;
+                break;
+            case TYPE.Weapon:
+                other.GetComponent<ShipControllerBase>().SwitchWeapon(weapon);
                 break;
             default:
                 break;

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 [RequireComponent(typeof (Animator))]
 public abstract class ShipControllerBase : MonoBehaviour, IControllable
@@ -18,7 +19,27 @@ public abstract class ShipControllerBase : MonoBehaviour, IControllable
     protected int _thrustYHashID;
     protected int _shieldHashID;
 
+    private List<Weapon> _weapons;
     private Weapon _weapon;
+    public Weapon Weapon
+    {
+        get
+        {
+            if(!_weapon)
+                _weapon = GetComponentInChildren<Weapon>();
+            return _weapon;
+        }
+        set
+        {
+            if (value != _weapon)
+            {
+                _weapon = value;
+                if (!_weapons.Contains(_weapon))
+                    _weapons.Add(_weapon);
+            }
+        }
+    }
+
 
     public bool Attaking
     {
@@ -68,22 +89,8 @@ public abstract class ShipControllerBase : MonoBehaviour, IControllable
     private bool _firing;
     protected bool Firing
     {
-        get { return _firing; }
-        set
-        {
-            if (value != _firing)
-            {
-                _firing = value;
-                if (_firing)
-                {
-                    _weapon.InvokeRepeating("Fire", (1f / _weapon.firingRate), (1f / _weapon.firingRate));
-                }
-                else
-                {
-                    _weapon.CancelInvoke();
-                }
-            }
-        }
+        get { return _weapon.Firing; }
+        set { _weapon.Firing = value; }
     }
 
     private Vector2 _thrust;
@@ -115,7 +122,7 @@ public abstract class ShipControllerBase : MonoBehaviour, IControllable
         }
     }
 
-    public virtual void Move(Vector2 movement)
+    public virtual void Move (Vector2 movement)
     {
         movement = Vector2.ClampMagnitude(movement, 1.0f);
         movement.y = Mathf.Clamp(movement.y, -rearPowerLimit, 1);
@@ -130,10 +137,40 @@ public abstract class ShipControllerBase : MonoBehaviour, IControllable
         enabled = (movement != Vector2.zero);
     }
 
+    public void SwitchWeapon (Weapon newWeapon)
+    {
+        if (Weapon.name == newWeapon.name)
+            return;
+
+        bool wasFiring = Firing;
+        Firing = false;
+        Weapon.gameObject.SetActive(false);
+
+        var existingWeapon = (from item in _weapons
+                              where item.name == newWeapon.name
+                              select item).FirstOrDefault();
+
+        if (existingWeapon != null)
+        {
+            existingWeapon.gameObject.SetActive(true);
+            Weapon = existingWeapon;
+        }
+        else
+        {
+            GameObject newWeaponGO = Instantiate(newWeapon.gameObject);
+            newWeaponGO.transform.parent = transform;
+            newWeaponGO.transform.localPosition = Vector3.zero;
+            newWeaponGO.transform.localRotation = Quaternion.identity;
+            Weapon = newWeaponGO.GetComponent<Weapon>();
+            Weapon.gameObject.SetActive(true);
+        }
+
+        Firing = wasFiring;
+    }
+
     protected virtual void Awake()
     {
         _animatorController = GetComponent<Animator>();
-        _weapon = GetComponentInChildren<Weapon>();
 
         _steeringHashID = Animator.StringToHash("Steering");
         _thrustXHashID = Animator.StringToHash("ThrustX");
@@ -142,6 +179,9 @@ public abstract class ShipControllerBase : MonoBehaviour, IControllable
         _shieldHashID = _animatorController.GetLayerIndex("Shield");
         if (_shieldHashID == -1)
             Debug.LogWarning("Animator controller must have a 'Shield' layer!");
+
+        _weapons = new List<Weapon>();
+        _weapons.Add(Weapon);
     }
 
 }
