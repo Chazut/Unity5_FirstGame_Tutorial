@@ -16,6 +16,7 @@ public abstract class ShipControllerBase : MonoBehaviour, IControllable
     protected int _steeringHashID;
     protected int _thrustXHashID;
     protected int _thrustYHashID;
+    protected int _shieldHashID;
 
     private Weapon _weapon;
 
@@ -29,6 +30,38 @@ public abstract class ShipControllerBase : MonoBehaviour, IControllable
         set
         {
             Firing = value;
+        }
+    }
+    public bool Protecting
+    {
+        get
+        {
+            return Shield;
+        }
+
+        set
+        {
+            Shield = value;
+        }
+    }
+
+    private bool _shield;
+    protected bool Shield
+    {
+        get
+        {
+            return _shield;
+        }
+
+        set
+        {
+            if(value != _shield)
+            {
+                _shield = value;
+                _animatorController.SetLayerWeight(_shieldHashID, _shield ? 1f : 0f);
+            }
+            if (_shield)
+                Firing = false;
         }
     }
 
@@ -100,10 +133,15 @@ public abstract class ShipControllerBase : MonoBehaviour, IControllable
     protected virtual void Awake()
     {
         _animatorController = GetComponent<Animator>();
+        _weapon = GetComponentInChildren<Weapon>();
+
         _steeringHashID = Animator.StringToHash("Steering");
         _thrustXHashID = Animator.StringToHash("ThrustX");
         _thrustYHashID = Animator.StringToHash("ThrustY");
-        _weapon = GetComponentInChildren<Weapon>();
+
+        _shieldHashID = _animatorController.GetLayerIndex("Shield");
+        if (_shieldHashID == -1)
+            Debug.LogWarning("Animator controller must have a 'Shield' layer!");
     }
 
 }

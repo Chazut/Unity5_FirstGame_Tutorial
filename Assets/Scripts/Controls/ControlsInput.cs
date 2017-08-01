@@ -13,6 +13,7 @@ public class ControlsInput : ControlsBase {
         controllable.Move(_movement);
 
         controllable.Attaking = Input.GetButton("Fire1");
+        controllable.Protecting = Input.GetButton("Fire3");
     }
 
 }
