@@ -168,6 +168,21 @@ public abstract class ShipControllerBase : MonoBehaviour, IControllable
         Firing = wasFiring;
     }
 
+    public virtual void ResetShip()
+    {
+        Steering = 0;
+        Thrust = Vector2.zero;
+        Firing = Shield = false;
+
+        transform.position = Vector3.zero;
+        transform.rotation = Quaternion.identity;
+
+        gameObject.SendMessage("Repair");
+
+        SwitchWeapon(_weapons[0]);
+        _weapons = new List<Weapon>();
+    }
+
     protected virtual void Awake()
     {
         _animatorController = GetComponent<Animator>();

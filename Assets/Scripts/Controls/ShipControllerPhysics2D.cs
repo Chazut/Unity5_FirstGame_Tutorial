@@ -25,4 +25,11 @@ public class ShipControllerPhysics2D : ShipControllerBase {
         _rigidBody2D.AddRelativeForce(_thrustDirection, ForceMode2D.Force);
     }
 
+    public override void ResetShip()
+    {
+        base.ResetShip();
+        _rigidBody2D.velocity = Vector2.zero;
+        _rigidBody2D.angularVelocity = 0;
+    }
+
 }
