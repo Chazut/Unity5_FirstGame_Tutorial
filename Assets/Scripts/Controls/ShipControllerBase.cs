@@ -17,6 +17,42 @@ public abstract class ShipControllerBase : MonoBehaviour, IControllable
     protected int _thrustXHashID;
     protected int _thrustYHashID;
 
+    private Weapon _weapon;
+
+    public bool Attaking
+    {
+        get
+        {
+            return Firing;
+        }
+
+        set
+        {
+            Firing = value;
+        }
+    }
+
+    private bool _firing;
+    protected bool Firing
+    {
+        get { return _firing; }
+        set
+        {
+            if (value != _firing)
+            {
+                _firing = value;
+                if (_firing)
+                {
+                    _weapon.InvokeRepeating("Fire", (1f / _weapon.firingRate), (1f / _weapon.firingRate));
+                }
+                else
+                {
+                    _weapon.CancelInvoke();
+                }
+            }
+        }
+    }
+
     private Vector2 _thrust;
     protected Vector2 Thrust
     {
@@ -46,7 +82,6 @@ public abstract class ShipControllerBase : MonoBehaviour, IControllable
         }
     }
 
-
     public virtual void Move(Vector2 movement)
     {
         movement = Vector2.ClampMagnitude(movement, 1.0f);
@@ -68,6 +103,7 @@ public abstract class ShipControllerBase : MonoBehaviour, IControllable
         _steeringHashID = Animator.StringToHash("Steering");
         _thrustXHashID = Animator.StringToHash("ThrustX");
         _thrustYHashID = Animator.StringToHash("ThrustY");
+        _weapon = GetComponentInChildren<Weapon>();
     }
 
 }

@@ -11,6 +11,8 @@ public class ControlsInput : ControlsBase {
         _movement.x = Input.GetAxis("Horizontal");
         _movement.y = Input.GetAxis("Vertical");
         controllable.Move(_movement);
+
+        controllable.Attaking = Input.GetButton("Fire1");
     }
 
 }
